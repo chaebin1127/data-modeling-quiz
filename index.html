@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f7fb">
+<title>데이터 모델링의 이해 | Mini Quiz</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap');
+:root{--ink:#20243a;--muted:#737991;--line:#e8eaf2;--purple:#7066e8;--purple2:#eeeaff;--bg:#f6f7fb;--white:#fff;--green:#16845b;--red:#d34e62}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+button{font:inherit;cursor:pointer}.shell{max-width:900px;margin:0 auto;padding:34px 22px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}.brand{display:flex;gap:11px;align-items:center;font-weight:800;letter-spacing:-.4px}.logo{width:39px;height:39px;border-radius:13px;background:var(--purple);color:#fff;display:grid;place-items:center;font-size:18px;box-shadow:0 7px 18px #7066e833}.tag{font-size:12px;color:var(--muted);background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:99px}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:25px;box-shadow:0 15px 45px #28305a0a}
+.intro{padding:54px 56px;text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--purple2);color:var(--purple);font-weight:700;font-size:12px;padding:8px 13px;border-radius:99px}.intro h1{font-size:clamp(30px,5vw,44px);letter-spacing:-1.7px;margin:20px 0 12px;line-height:1.2}.intro p{color:var(--muted);line-height:1.75;margin:0 auto;max-width:520px}.stats{display:flex;justify-content:center;gap:12px;margin:28px 0 32px;flex-wrap:wrap}.stat{padding:12px 17px;border:1px solid var(--line);border-radius:14px;min-width:112px}.stat b{display:block;font-size:18px}.stat span{font-size:11px;color:var(--muted);display:block;margin-top:4px}.primary{border:0;background:var(--purple);color:#fff;border-radius:14px;padding:15px 27px;font-weight:700;box-shadow:0 8px 18px #7066e833;transition:.2s}.primary:hover{transform:translateY(-2px);background:#5f55d6}.secondary{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:13px;padding:13px 18px;font-weight:650}.quiz{padding:34px 42px}.quiz-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.q-count{font-weight:800;font-size:14px}.q-count span{color:var(--purple)}.topic{font-size:12px;color:var(--purple);background:var(--purple2);padding:7px 11px;border-radius:99px;font-weight:700}.progress{height:7px;background:#f0f1f7;border-radius:99px;overflow:hidden;margin-bottom:32px}.progress>div{height:100%;background:linear-gradient(90deg,#8d83ff,#6259db);border-radius:99px;transition:width .25s}.question{font-size:clamp(20px,3vw,25px);font-weight:750;line-height:1.5;letter-spacing:-.6px;margin:0 0 25px}.options{display:grid;gap:11px}.option{width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px 18px;display:flex;align-items:flex-start;gap:13px;color:var(--ink);line-height:1.55;transition:.15s}.option:hover:not(:disabled){border-color:#aaa3ff;background:#fbfaff}.option .letter{width:27px;height:27px;flex:0 0 27px;border-radius:9px;background:#f3f4f8;color:#777d93;display:grid;place-items:center;font-size:12px;font-weight:800}.option.selected{border:1.5px solid var(--purple);background:#f8f7ff}.option.selected .letter{background:var(--purple);color:white}.option.correct{border-color:#54b88d;background:#f1fbf6}.option.correct .letter{background:#16845b;color:white}.option.wrong{border-color:#e38a97;background:#fff5f6}.option.wrong .letter{background:var(--red);color:white}.option:disabled{cursor:default}.feedback{display:none;margin-top:19px;padding:16px 18px;border-radius:14px;line-height:1.65;font-size:14px}.feedback.show{display:block}.feedback.good{background:#effaf5;color:#176b4d}.feedback.bad{background:#fff4f5;color:#983a4b}.feedback b{display:block;margin-bottom:4px}.controls{display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:10px}.controls .right{display:flex;gap:9px}.controls button:disabled{opacity:.38;cursor:not-allowed}.hint{color:var(--muted);font-size:12px;margin-top:18px}.result{padding:45px;text-align:center}.result-icon{width:76px;height:76px;border-radius:25px;background:var(--purple2);color:var(--purple);display:grid;place-items:center;font-size:34px;margin:0 auto 18px}.result h2{font-size:32px;margin:0 0 9px;letter-spacing:-1px}.result>p{color:var(--muted);margin:0}.score{font-size:58px;font-weight:850;letter-spacing:-2px;margin:25px 0 4px}.score small{font-size:19px;color:var(--muted);letter-spacing:0}.result-stats{display:flex;justify-content:center;gap:12px;margin:25px 0 30px}.result-stats div{background:#f8f8fc;padding:14px 23px;border-radius:14px;min-width:105px}.result-stats b{display:block;font-size:20px}.result-stats span{font-size:11px;color:var(--muted)}.review{text-align:left;margin-top:30px;border-top:1px solid var(--line);padding-top:24px}.review h3{font-size:17px}.review-item{padding:15px 0;border-bottom:1px solid var(--line)}.review-item b{display:block;font-size:14px;line-height:1.5}.review-item p{margin:7px 0 0;font-size:13px;color:var(--muted);line-height:1.6}.review-item .wrong-answer{color:var(--red)}.review-item .right-answer{color:var(--green)}.hidden{display:none!important}.footer{text-align:center;color:#a0a4b5;font-size:11px;margin-top:23px}
+@media(max-width:600px){.shell{padding:20px 13px 40px}.top{margin-bottom:20px}.intro{padding:38px 22px}.quiz{padding:24px 19px}.quiz-head{align-items:flex-start}.question{font-size:21px}.option{padding:14px}.result{padding:35px 20px}.result-stats{gap:7px}.result-stats div{padding:12px 15px;min-width:0;flex:1}.controls{align-items:stretch}.controls button{padding:12px 14px}.tag{font-size:10px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top"><div class="brand"><div class="logo">D</div><span>DB STUDY <span style="color:var(--purple)">/ QUIZ</span></span></div><div class="tag">AI서비스와DB · 데이터 모델링</div></header>
+<main>
+<section id="intro" class="panel intro">
+<div class="eyebrow">✦ KNOWLEDGE CHECK</div>
+<h1>데이터 모델링의 이해</h1>
+<p>핵심 개념부터 ERD 해석까지, 지금까지 학습한 내용을 20문항으로 점검해 보세요.</p>
+<div class="stats"><div class="stat"><b>20문항</b><span>총 문제 수</span></div><div class="stat"><b>20점</b><span>만점</span></div><div class="stat"><b>객관식</b><span>문항 유형</span></div></div>
+<button class="primary" id="startBtn">퀴즈 시작하기 <span aria-hidden="true">→</span></button>
+</section>
+<section id="quiz" class="panel quiz hidden">
+<div class="quiz-head"><div class="q-count">QUESTION <span id="currentNo">01</span> <span style="color:#a1a5b5">/ 20</span></div><div class="topic" id="category">데이터 모델링</div></div>
+<div class="progress"><div id="progressBar" style="width:5%"></div></div>
+<h2 class="question" id="questionText"></h2>
+<div class="options" id="options"></div>
+<div id="feedback" class="feedback" aria-live="polite"></div>
+<div class="controls"><button class="secondary" id="prevBtn">← 이전</button><div class="right"><button class="secondary" id="checkBtn" disabled>정답 확인</button><button class="primary" id="nextBtn" disabled>다음 문제 →</button></div></div>
+<div class="hint">보기 하나를 선택한 뒤 정답 확인을 눌러 주세요.</div>
+</section>
+<section id="result" class="panel result hidden">
+<div class="result-icon">✦</div><h2 id="resultTitle">퀴즈 완료!</h2><p id="resultMessage">수고했어요. 학습 결과를 확인해 보세요.</p>
+<div class="score"><span id="scoreNum">0</span><small> / 20점</small></div>
+<div class="result-stats"><div><b id="correctNum">0</b><span>정답</span></div><div><b id="wrongNum">0</b><span>오답</span></div><div><b id="percentNum">0%</b><span>정답률</span></div></div>
+<button class="primary" id="retryBtn">다시 풀기 ↻</button>
+<div class="review"><h3>문항별 정답 및 해설</h3><div id="reviewList"></div></div>
+</section>
+</main>
+<div class="footer">DATA MODELING · MINI QUIZ <span id="year"></span></div>
+</div>
+<script>
+const questions = [{"category": "데이터 모델링의 개념", "q": "데이터 모델링을 가장 잘 설명한 것은?", "options": ["현실 세계의 정보를 그대로 복사해 저장하는 과정", "현실 세계를 단순화·추상화·명확화하여 데이터베이스로 표현하는 과정", "데이터베이스에 저장된 데이터를 삭제하는 과정", "SQL 문장을 자동으로 생성하는 과정"], "answer": 1, "explain": "데이터 모델링은 현실 세계의 복잡한 정보를 단순화·추상화·명확화하여 데이터베이스로 표현하는 기법이야."}, {"category": "데이터 모델링의 개념", "q": "데이터 모델링의 세 가지 관점으로 옳은 것은?", "options": ["입력( Input ), 출력( Output ), 저장( Save )", "데이터(What), 프로세스(How), 상호작용(Interaction)", "개념(Concept), 논리(Logic), 물리(Physical)", "엔티티(Entity), 속성(Attribute), 키(Key)"], "answer": 1, "explain": "데이터 모델링은 데이터 관점(What), 프로세스 관점(How), 상호작용 관점(Interaction)으로 구분해 볼 수 있어."}, {"category": "ERD", "q": "데이터 모델링이 진행되는 일반적인 단계의 순서로 옳은 것은?", "options": ["물리적 모델링 → 개념적 모델링 → 논리적 모델링", "논리적 모델링 → 물리적 모델링 → 개념적 모델링", "개념적 모델링 → 논리적 모델링 → 물리적 모델링", "개념적 모델링 → 물리적 모델링 → 논리적 모델링"], "answer": 2, "explain": "현실 세계의 주요 개념을 먼저 정리하는 개념적 모델링에서 시작해 논리적 모델링, 물리적 모델링 순서로 구체화해."}, {"category": "ERD", "q": "ERD에서 일반적으로 사각형으로 표현하는 요소는?", "options": ["관계(Relationship)", "엔티티(Entity)", "속성(Attribute)", "속성값(Value)"], "answer": 1, "explain": "ERD에서 엔티티는 사각형, 관계는 다이아몬드, 속성은 타원형으로 표현하는 방식이 대표적이야."}, {"category": "ERD", "q": "강의자료에 제시된 ERD 작성 절차의 올바른 순서는?", "options": ["관계 설정 → 엔티티 도출 → 관계명 부여 → 배치 → 참여도 → 필수 여부", "엔티티 도출 및 그리기 → 배치 → 관계 설정 → 관계명 부여 → 참여도 표시 → 필수/선택 설정", "속성 추가 → SQL 작성 → 엔티티 배치 → 관계 삭제", "엔티티 배치 → 참여도 표시 → 엔티티 도출 → 관계 설정"], "answer": 1, "explain": "자료의 핵심 순서는 엔티티 도출 및 그리기, 배치, 관계 설정, 관계명, 참여도, 관계의 필수/선택 여부 설정이야."}, {"category": "엔티티와 속성", "q": "엔티티(Entity)에 대한 설명으로 가장 적절한 것은?", "options": ["데이터베이스에서 한 번만 사용되는 SQL 명령어", "업무에서 사용되는 데이터를 용도별로 분류한, 독립적으로 식별 가능한 객체", "엔티티 간 연결을 나타내는 선", "하나의 속성에 저장되는 실제 값"], "answer": 1, "explain": "엔티티는 업무에서 실제 사용하는 정보의 그룹이며, 독립적으로 식별 가능한 사람·장소·물건·사건·개념 등이 될 수 있어."}, {"category": "엔티티와 속성", "q": "강의자료에서 제시한 엔티티의 일반적인 특성으로 옳지 않은 것은?", "options": ["2개 이상의 인스턴스를 가진다.", "1개 이상의 속성을 가진다.", "다른 엔티티와 1개 이상의 관계를 가진다.", "반드시 1개의 인스턴스만 가진다."], "answer": 3, "explain": "자료에서는 엔티티가 2개 이상의 인스턴스와 1개 이상의 속성을 가지며, 다른 엔티티와 관계를 맺는다고 설명해."}, {"category": "엔티티와 속성", "q": "회원 엔티티의 속성이 회원번호(PK), 회원명, 아이디, 핸드폰번호, 회원등급코드(FK)일 때 일반 속성은?", "options": ["회원번호와 회원등급코드", "회원명, 아이디, 핸드폰번호", "회원번호만", "회원등급코드만"], "answer": 1, "explain": "PK는 회원번호, FK는 회원등급코드야. 이를 제외한 회원명·아이디·핸드폰번호가 일반 속성이야."}, {"category": "관계와 카디널리티", "q": "한 명의 회원은 여러 주문을 할 수 있지만, 하나의 주문은 한 명의 회원에게만 속한다. 카디널리티는?", "options": ["1:1", "1:N", "N:M", "N:1"], "answer": 1, "explain": "회원 한 명에 주문 여러 건이 연결되므로 회원(1) : 주문(N)의 일대다 관계야."}, {"category": "관계와 카디널리티", "q": "학생 한 명이 여러 과목을 수강할 수 있고, 한 과목도 여러 학생이 수강할 수 있다. 학생과 과목의 관계는?", "options": ["1:1", "1:N", "N:M", "관계가 없음"], "answer": 2, "explain": "양쪽 모두 여러 개와 연결될 수 있으므로 학생과 과목은 N:M(다대다) 관계야."}, {"category": "관계와 카디널리티", "q": "학생과 과목의 N:M 관계를 데이터베이스에서 구현할 때 일반적으로 사용하는 방법은?", "options": ["학생 엔티티를 삭제한다.", "과목 엔티티에 학생 정보를 모두 반복 저장한다.", "수강신청과 같은 교차(연관) 엔티티를 둔다.", "두 엔티티 사이의 관계를 표현하지 않는다."], "answer": 2, "explain": "수강신청이라는 교차 엔티티를 두면 학생(1):수강신청(N), 과목(1):수강신청(N)으로 나누어 관리할 수 있어."}, {"category": "관계와 카디널리티", "q": "온라인 쇼핑몰에서 상품 하나가 여러 주문상품에 포함되고, 주문상품 하나는 하나의 상품을 가리킨다. 상품과 주문상품의 관계는?", "options": ["상품(1) : 주문상품(N)", "상품(N) : 주문상품(1)", "상품(1) : 주문상품(1)", "상품(N) : 주문상품(M)"], "answer": 0, "explain": "하나의 상품이 여러 주문에서 주문상품으로 기록될 수 있으므로 상품(1) : 주문상품(N)이야."}, {"category": "식별자", "q": "주식별자의 주요 특성으로만 묶인 것은?", "options": ["유일성, 최소성, 불변성, 존재성", "중복성, 가변성, 선택성, 최대성", "유일성, 중복성, 가변성, 존재성", "최소성, 중복성, 선택성, 불변성"], "answer": 0, "explain": "주식별자는 유일성·최소성·불변성·존재성의 네 가지 특성을 가져야 해."}, {"category": "식별자", "q": "이메일이 회원번호 외에 회원을 구분할 수 있는 속성으로 지정되었다면, 이메일은 어떤 식별자에 해당하는가?", "options": ["주식별자", "보조식별자", "대리식별자", "외부식별자"], "answer": 1, "explain": "주식별자 외에 인스턴스를 구분할 수 있는 추가 식별자는 보조식별자(Alternate Identifier)야."}, {"category": "식별자", "q": "댓글 엔티티가 부모 엔티티인 게시글의 게시글번호를 물려받아 사용하는 경우, 게시글번호는 댓글 엔티티에서 어떤 식별자인가?", "options": ["내부식별자", "외부식별자", "대리식별자", "보조식별자"], "answer": 1, "explain": "다른 엔티티(부모 엔티티)의 식별자를 상속받은 것은 외부식별자야."}, {"category": "식별자", "q": "주문번호와 상품번호를 함께 사용해 주문상품 인스턴스를 구분한다면 어떤 식별자인가?", "options": ["단일식별자", "복합식별자", "보조식별자", "대리식별자"], "answer": 1, "explain": "둘 이상의 속성을 조합하여 인스턴스를 식별하므로 복합식별자야."}, {"category": "식별자 관계", "q": "자식 엔티티의 주식별자에 부모 엔티티의 식별자가 포함되는 관계는?", "options": ["비식별자 관계", "식별자 관계", "N:M 관계", "선택 관계"], "answer": 1, "explain": "부모의 식별자가 자식의 주식별자 일부로 사용되면 식별자 관계(Identifying Relationship)야."}, {"category": "식별자 관계", "q": "회원 엔티티의 회원번호가 주문 엔티티의 FK로만 존재하고 주문의 PK에는 포함되지 않는다면, 회원-주문 관계는?", "options": ["식별자 관계", "비식별자 관계", "복합식별자 관계", "N:M 관계"], "answer": 1, "explain": "부모의 식별자가 자식의 PK에 포함되지 않고 일반 FK로만 사용되므로 비식별자 관계야."}, {"category": "실전 ERD 해석", "q": "주문과 상품 사이의 N:M 관계를 해소하기 위해 주문상품 엔티티를 만들었다. 주문상품의 식별자를 주문번호+상품번호로 구성했다면 옳은 설명은?", "options": ["주문상품은 주문과 상품을 연결하는 교차 엔티티이며, 두 속성의 조합은 복합식별자다.", "주문상품은 속성이 없는 엔티티다.", "주문과 상품은 더 이상 관계가 없다.", "주문번호와 상품번호는 모두 일반 속성이다."], "answer": 0, "explain": "주문상품은 주문과 상품의 N:M 관계를 1:N 두 개로 해소하는 교차 엔티티야. 주문번호와 상품번호를 함께 PK로 쓰면 복합식별자야."}, {"category": "실전 ERD 해석", "q": "다음 중 식별자의 종류와 예시가 올바르게 연결된 것은?", "options": ["대리식별자 — 주민등록번호", "원조식별자 — 시스템에서 자동 생성한 일련번호", "단일식별자 — 학번 하나로 학생을 구분", "복합식별자 — 이메일 하나로 회원을 구분"], "answer": 2, "explain": "학번 하나로 학생을 구분하면 단일식별자야. 주민등록번호·사업자등록번호는 원조식별자, 시스템이 만든 자동 증가 ID는 대리식별자, 주문번호+상품번호는 복합식별자의 예야."}];
+let index=0, selected=null, checked=false, answers=Array(questions.length).fill(null);
+const $=id=>document.getElementById(id);
+$("year").textContent=new Date().getFullYear();
+function show(section){["intro","quiz","result"].forEach(id=>$(id).classList.toggle("hidden",id!==section));}
+function start(){index=0;selected=null;checked=false;answers=Array(questions.length).fill(null);show("quiz");render();}
+function render(){
+ const q=questions[index];selected=answers[index];checked=!!(selected&&selected.checked);
+ $("currentNo").textContent=String(index+1).padStart(2,"0");
+ $("category").textContent=q.category;$("questionText").textContent=q.q;
+ $("progressBar").style.width=((index+1)/questions.length*100)+"%";
+ $("options").innerHTML="";
+ q.options.forEach((opt,i)=>{
+  const b=document.createElement("button");b.className="option";b.type="button";
+  const letter=document.createElement("span");letter.className="letter";letter.textContent=String.fromCharCode(65+i);
+  const text=document.createElement("span");text.textContent=opt;b.append(letter,text);
+  if(selected&&selected.choice===i)b.classList.add("selected");
+  if(checked){b.disabled=true;if(i===q.answer)b.classList.add("correct");else if(i===selected.choice)b.classList.add("wrong");}
+  b.addEventListener("click",()=>choose(i));$("options").appendChild(b);
+ });
+ $("feedback").className="feedback";$("feedback").textContent="";
+ if(checked){const good=selected.choice===q.answer;$("feedback").className="feedback show "+(good?"good":"bad");$("feedback").innerHTML=`<b>${good?"정답이에요! ✓":"아쉬워요. 정답을 확인해 보세요."}</b>${q.explain}`;}
+ $("prevBtn").disabled=index===0;
+ $("checkBtn").classList.toggle("hidden",checked);$("checkBtn").disabled=selected===null;
+ $("nextBtn").classList.toggle("hidden",!checked);$("nextBtn").textContent=index===questions.length-1?"결과 보기 →":"다음 문제 →";
+ $("nextBtn").disabled=!checked;
+}
+function choose(i){if(checked)return;selected={choice:i,checked:false};answers[index]=selected;render();}
+function check(){if(selected===null)return;selected.checked=true;answers[index]=selected;checked=true;render();}
+function next(){if(!checked)return;if(index<questions.length-1){index++;render();}else finish();}
+function prev(){if(index>0){index--;render();}}
+function finish(){
+ const correct=answers.filter((a,i)=>a&&a.choice===questions[i].answer).length;
+ $("scoreNum").textContent=correct;$("correctNum").textContent=correct;$("wrongNum").textContent=questions.length-correct;$("percentNum").textContent=Math.round(correct/questions.length*100)+"%";
+ $("resultTitle").textContent=correct>=18?"완벽에 가까워요!":correct>=14?"좋은 결과예요!":correct>=10?"조금만 더 복습해 봐요!":"핵심 개념을 다시 확인해 봐요!";
+ $("resultMessage").textContent=correct>=14?"개념을 잘 이해하고 있어요. 오답 해설도 확인해 보세요.":"틀린 문제의 해설을 읽고 다시 도전해 보세요.";
+ $("reviewList").innerHTML="";
+ questions.forEach((q,i)=>{
+  const a=answers[i],good=a&&a.choice===q.answer;
+  const item=document.createElement("div");item.className="review-item";
+  const title=document.createElement("b");title.textContent=`Q${i+1}. ${q.q}`;
+  const result=document.createElement("p");result.className=good?"right-answer":"wrong-answer";result.textContent=`${good?"정답":"오답"} · 내 답: ${a?String.fromCharCode(65+a.choice)+". "+q.options[a.choice]:"미응답"} · 정답: ${String.fromCharCode(65+q.answer)}. ${q.options[q.answer]}`;
+  const explain=document.createElement("p");explain.textContent=q.explain;
+  item.append(title,result,explain);$("reviewList").appendChild(item);
+ });
+ show("result");window.scrollTo({top:0,behavior:"smooth"});
+}
+$("startBtn").addEventListener("click",start);$("checkBtn").addEventListener("click",check);$("nextBtn").addEventListener("click",next);$("prevBtn").addEventListener("click",prev);$("retryBtn").addEventListener("click",()=>{show("intro");window.scrollTo({top:0,behavior:"smooth"});});
+</script>
+</body></html>
